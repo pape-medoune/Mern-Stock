@@ -1,31 +1,29 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import SideBar from './components/Sidebar';
-import sidebar_menu from './constants/sidebar-menu'; 
+// import SideBar from "./components/Sidebar";
+// import sidebar_menu from "./constants/sidebar-menu";
 
-import './App.css';
-import Orders from './pages/Orders';
-import Team from './components/presentationTeam';
+import "./App.css";
+import SamaStock from "./components/samaStock";
+import Team from "./components/presentationTeam";
+import Orders from "./pages/Orders";
 
-function App () {
-  return(
+function App() {
+  return (
     <Router>
-      <div className='dashboard-container'>
-        <SideBar menu={sidebar_menu} />
-          
-          <div className='dashboard-body'>
-              <Routes>
-                  {/* <Route path="*" element={<div></div>} /> */}
-                  <Route exact path="/" element={<Team/>} />
-                  <Route exact path="/orders" element={< Orders/>} />
-                  <Route exact path="/locations" element={<div></div>} />
-                  <Route exact path="/profile" element={<div></div>} />
-              </Routes>
-          </div>
+      <div className="">
+        <div className="">
+          <Routes>
+            <Route path="*" element={<SamaStock />} />
+            <Route path="/teams" element={<Team />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route exact path="/" element={<SamaStock />} />
+          </Routes>
+        </div>
       </div>
     </Router>
-  )
+  );
 }
 
 export default App;

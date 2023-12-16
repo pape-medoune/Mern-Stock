@@ -30,6 +30,7 @@ function SideBar ({ menu }) {
                 <div className='sidebar-logo-container'>
                     <img 
                         src={logo}
+                        className=' rounded-full'
                         alt="logo" />
                 </div>
 

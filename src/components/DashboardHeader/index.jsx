@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import NotificationIcon from "../../assets/icons/notification.svg";
 import SettingsIcon from "../../assets/icons/settings.svg";
 import { useNavigate } from "react-router-dom";
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function DashboardHeader({ btnText, onClick }) {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ function DashboardHeader({ btnText, onClick }) {
   const [nomproduit, setNomproduit] = useState();
   const [description, setDescription] = useState();
   const [prix, setPrix] = useState();
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
   const [element, setElement] = useState([]);
 
   const fetchElement = async () => {
@@ -31,6 +33,16 @@ function DashboardHeader({ btnText, onClick }) {
     setIsModalOpenEdit(!isModalOpenEdit);
   };
 
+  const notify = ()=>{
+    // Set to 3sec
+    toast.success('Produit L\'ajout fait avec succés', {autoClose:4000})
+    // .then(()=>console.log("notify affiché successfully!"))
+    // .catch((err)=>console.log("Erreur notify!"))
+    
+  } 
+
+  
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -50,9 +62,7 @@ function DashboardHeader({ btnText, onClick }) {
       )
       .then((response) => {
         console.log("Data inserted successfully" + response.data);
-        setElement(response.data);
-        // alert("Insertion fait avec succés!")
-        navigate("/orders");
+        setElement(response.data);  
       })
       .catch((err) => {
         console.error("Erreur lors de l'insertion" + err);
@@ -108,7 +118,7 @@ function DashboardHeader({ btnText, onClick }) {
                 </button>
               </div>
 
-              <form action="#" encType="multipart/form-data" method="POST">
+              <form action="#"  onSubmit={notify} encType="multipart/form-data" method="POST">
                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
                   <div>
                     <label
@@ -215,13 +225,7 @@ function DashboardHeader({ btnText, onClick }) {
           </div>
         </div>
       )}
-      <div className="dashbord-header-right">
-        <img
-          className="dashbord-header-avatar"
-          src="https://reqres.in/img/faces/9-image.jpg"
-          alt="avatar"
-        />
-      </div>
+      <ToastContainer /> 
     </div>
   );
 }
