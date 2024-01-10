@@ -82,7 +82,7 @@ export default () => {
                 </Link>
               );
             })}
-            <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
+            {/* <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
             <div className="space-y-3 items-center gap-x-6 md:flex md:space-y-0">
               <li>
                 <Link
@@ -100,7 +100,7 @@ export default () => {
                   Sign in
                 </Link>
               </li>
-            </div>
+            </div> */}
           </ul>
         </div>
       </div>

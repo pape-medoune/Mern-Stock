@@ -4,9 +4,9 @@ import "./styles.css";
 import { useState, useEffect } from "react";
 import NotificationIcon from "../../assets/icons/notification.svg";
 import SettingsIcon from "../../assets/icons/settings.svg";
-import { useNavigate } from "react-router-dom";
-import {ToastContainer,toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom"; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function DashboardHeader({ btnText, onClick }) {
   const navigate = useNavigate();
@@ -33,22 +33,19 @@ function DashboardHeader({ btnText, onClick }) {
     setIsModalOpenEdit(!isModalOpenEdit);
   };
 
-  const notify = ()=>{
+  const notify = () => {
     // Set to 3sec
-    toast.success('Produit L\'ajout fait avec succés', {autoClose:4000})
+    toast.success("Produit L'ajout fait avec succés", { autoClose: 4000 });
     // .then(()=>console.log("notify affiché successfully!"))
     // .catch((err)=>console.log("Erreur notify!"))
-    
-  } 
+  };
 
-  
-  
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  
+
   const createElement = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -57,19 +54,19 @@ function DashboardHeader({ btnText, onClick }) {
     formData.append("prix", prix);
     formData.append("image", image);
     axios
-      .post("http://localhost:4400/add",
-        formData,
-      )
+      .post("http://localhost:4400/add", formData)
       .then((response) => {
         console.log("Data inserted successfully" + response.data);
-        setElement(response.data);  
+        setElement(response.data);
+        toast.success('This is Toast Notification for Success');
       })
       .catch((err) => {
         console.error("Erreur lors de l'insertion" + err);
+        toast.error("Erreur lors de l'insertion de votre produit !");
       });
   };
   return (
-    <div className="dashbord-header-container">
+    <div className="dashbord-header-container"> 
       <button
         id="defaultModalButton"
         data-modal-toggle="defaultModal"
@@ -118,7 +115,12 @@ function DashboardHeader({ btnText, onClick }) {
                 </button>
               </div>
 
-              <form action="#"  onSubmit={notify} encType="multipart/form-data" method="POST">
+              <form
+                action="#"
+                onSubmit={notify}
+                encType="multipart/form-data"
+                method="POST"
+              >
                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
                   <div>
                     <label
@@ -192,7 +194,7 @@ function DashboardHeader({ btnText, onClick }) {
                     </label>
                     <input
                       type="file"
-                      name="image" 
+                      name="image"
                       // value={image}
                       id="image"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -225,7 +227,7 @@ function DashboardHeader({ btnText, onClick }) {
           </div>
         </div>
       )}
-      <ToastContainer /> 
+      <ToastContainer />
     </div>
   );
 }

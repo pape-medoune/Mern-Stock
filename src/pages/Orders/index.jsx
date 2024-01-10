@@ -6,8 +6,7 @@ import { MdDeleteForever } from "react-icons/md";
 import "../styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SideBar from "../../components/Sidebar";
-// import SideBar from "./components/Sidebar";
+import SideBar from "../../components/Sidebar";  
 import sidebar_menu from "../../constants/sidebar-menu";
 
 function Orders() {
@@ -83,8 +82,10 @@ function Orders() {
 
       console.log(response.data);
       setElement(response.data);
+      toast.success('Contenue modifié avec succés');
     } catch (err) {
       console.error("Error: " + err);
+      toast.error('Erreur lors de la modification ');
     }
   };
 
@@ -95,14 +96,18 @@ function Orders() {
   };
 
   const supprimerProduit = (id) => {
-    axios
-      .delete(`http://localhost:4400/delete?id=${id}`)
-      .then((res) => {
-        console.log("Success supp");
-      })
-      .catch((err) => {
-        console.error("Amna erreur !" + err);
-      });
+    window.confirm("Etes vous sur de vouloir supprimer le produit ?").then(
+      axios
+        .delete(`http://localhost:4400/delete?id=${id}`)
+        .then((res) => {
+          console.log("Success supp");
+          toast.success(` Produit  supprimé avec succés `);
+        })
+        .catch((err) => {
+          console.error("Amna erreur !" + err);
+          toast.error(`Erreur lors de la suppression du produit`);
+        })
+    );
   };
 
   // const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,12 +116,12 @@ function Orders() {
   //   setIsModalOpen(!isModalOpen);
   // };
   return (
-    <div className="w-full h-fit  flex flex-row">
+    <div className="w-full h-fit flex flex-row">
       <SideBar menu={sidebar_menu} />
-      <div>
+      <div className="w-full">
         {" "}
         <DashboardHeader btnText="New Order" />
-        <div className=" w-full">
+        <div className=" w-full flex items-center flex-col ">
           <table className="w-full flex flex-col  text-sm text-left  text-gray-500 dark:text-gray-400">
             <thead className="text-xs flex   text-gray-200 uppercase  bg-gray-700">
               <tr className="w-full dark:bg-sky-800 grid grid-cols-5">
@@ -325,8 +330,7 @@ function Orders() {
                                   </svg>
                                   Modifier le produit
                                 </button>
-                              </form>
-                              <ToastContainer />
+                              </form> 
                             </div>
                           </div>
                         </div>
@@ -336,7 +340,6 @@ function Orders() {
                       className="block text-white font-bold bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 -rounded-lg text-sm px-5 py-2.5 text-center "
                       type="button"
                       onClick={() => {
-                        
                         supprimerProduit(ele._id);
                       }}
                     >
@@ -353,6 +356,7 @@ function Orders() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

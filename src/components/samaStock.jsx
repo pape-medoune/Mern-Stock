@@ -22,10 +22,10 @@ function SamaStock() {
     // </div>
     <>
       <Navbar />
-      <Home />
+      
       {/* <Products /> */}
       <Routes>
-        {/* <Route path="/home" element={<Home/>}></Route> */}
+        <Route path="/home" element={<Home/>}></Route>
         <Route path="/products" element={<Products />}></Route>
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />

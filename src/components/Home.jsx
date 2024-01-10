@@ -27,7 +27,8 @@ function Home() {
                 1000,
               ]}
               speed={10}
-              style={{ color: "blue" }}
+              //style={{ color: "blue" }}
+              className="text-blue-600"
               repeat={Infinity}
             />
           </p>
@@ -38,8 +39,8 @@ function Home() {
             aussi facile
           </q>
         </p>
-        <button className="bg-indigo-600 active:bg-blue-600 active:shadow-none text-white w-[200px] rounded-lg font-medium my-6 mx-auto py-4 hover:bg-indigo-500 shadow">
-          <Link to="/dashboard">Accéder</Link>
+        <button className="bg-blue-600 active:bg-blue-600 active:shadow-none text-white w-[200px] rounded-lg font-medium my-6 mx-auto py-4 hover:bg-indigo-500 shadow">
+          <Link to="/">Accéder</Link>
           {/* En cliquant sur ce boutton, l'utilisateur pourra acceder directement au tableau de bord */}
         </button>
       </div>

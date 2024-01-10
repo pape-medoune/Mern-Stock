@@ -1,12 +1,16 @@
 import React from "react";
 import me from "../assets/images/me.jpeg";
+import issakha from '../assets/images/WhatsApp Image 2023-12-19 at 14.06.50.jpeg' 
 import "./team.css";
+import omar from "../assets/images/omar.jpeg"
 import { DiGithubAlt } from "react-icons/di";
 import { useEffect, useRef } from "react";
 import { TweenMax, Power3 } from "gsap";
 import SideBar from "../components/Sidebar";
 // import SideBar from "./components/Sidebar";
 import sidebar_menu from "../constants/sidebar-menu";
+import axios from "axios";
+import { FaGithub,FaLinkedin } from "react-icons/fa6";
 
 function Team() {
   let bigTitleSpan1 = useRef(null);
@@ -137,10 +141,43 @@ function Team() {
     );
   }, []);
 
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const token = getCookie("token");
+
+        if (!token) {
+          console.error("Token not found");
+          return;
+        }
+
+        const response = await axios.get("http://localhost:4400/login", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const userData = response.data;
+        console.log("Authenticated user data:", userData);
+      } catch (error) {
+        console.error("Authentication failed:", error);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  function getCookie(name) {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${name}=`));
+
+    return cookieValue ? cookieValue.split("=")[1] : null;
+  }
   return (
     <section className=" h-screen flex flex-row ">
       <SideBar menu={sidebar_menu} />
-      <div class="flex flex-col w-full  h-screen justify-between">
+      <div class="flex flex-col w-full -mt-3 h-screen justify-between">
         <div className="flex justify-center text-[6.5vw]">
           <span ref={(El) => (bigTitleSpan1 = El)} className="slogan">
             S
@@ -172,20 +209,19 @@ function Team() {
           </span>
         </div>
         <div className="max-w-xl mx-auto sm:text-center">
-            <h3 
-              ref={(El) => (secondTitle = El)}
-              className="text-gray-800 text-3xl font-semibold sm:text-4xl"
-            >
-              Notre Equipe de devs
-            </h3>
-            <p ref={(El) => (subTitle = El)} className="text-gray-600 mt-3">
-              Composition de notre équipe !
-            </p>
-          </div>
+          <h3
+            ref={(El) => (secondTitle = El)}
+            className="text-gray-800 text-3xl font-semibold sm:text-4xl"
+          >
+            Notre Equipe de devs
+          </h3>
+          <p ref={(El) => (subTitle = El)} className="text-gray-600 mt-3">
+            Composition de notre équipe !
+          </p>
+        </div>
         <div className="max-w-screen-xl mx-auto md:px-8">
-          
           <div className="">
-            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4  ">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div
                   className="w-full bg-white shadow-lg hover:shadow-md  rounded-lg p-12 flex flex-col justify-center items-center"
@@ -194,7 +230,7 @@ function Team() {
                   <div className="mb-8">
                     <img
                       className="object-center object-cover rounded-full h-36 w-36"
-                      src={me}
+                      src={issakha}
                       alt="photo"
                     />
                   </div>
@@ -204,6 +240,16 @@ function Team() {
                     </p>
                     <p className="text-base text-gray-400 font-normal">
                       Développeur full stack web et mobile
+                    </p>
+
+                    <p className="text-base flex flex-row gap-x-3 justify-center mt-1 items-center text-gray-400 font-normal">
+                      <a href="https://github.com/cisse410">
+                        <FaGithub size={35} />
+                      </a>
+
+                      <a href="https://www.linkedin.com/in/issakha-cisse">
+                        <FaLinkedin  size={35} />
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -223,7 +269,17 @@ function Team() {
                       Mouhamedoune Fall
                     </p>
                     <p className="text-base text-gray-400 font-normal">
-                      Développeur full stack web et mobile
+                      Développeur fullStack web et mobile Chez DIGITA
+                    </p>
+
+                    <p className="text-base flex flex-row gap-x-3 justify-center mt-1 items-center text-gray-400 font-normal">
+                      <a href="https://github.com/pape-medoune">
+                        <FaGithub size={35} />
+                      </a>
+
+                      <a href="www.linkedin.com/in/mouhamedoune-fall-99b79322b">
+                        <FaLinkedin  size={35} />
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -234,16 +290,26 @@ function Team() {
                   <div className="mb-8">
                     <img
                       className="object-center object-cover rounded-full h-36 w-36"
-                      src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1176&q=80"
+                      src={omar}
                       alt="photo"
                     />
                   </div>
                   <div className="text-center">
                     <p className="text-xl text-gray-700 font-bold mb-2">
-                      Omar Boune K. Thiam 
+                      Omar Boune K. Thiam
                     </p>
                     <p className="text-base text-gray-400 font-normal">
-                      Developpeur Web
+                      Developpeur Web et mobile
+                    </p>
+
+                    <p className="text-base flex flex-row gap-x-3 justify-center mt-1 items-center text-gray-400 font-normal">
+                      <a href="https://github.com/omzo1234">
+                        <FaGithub size={35} />
+                      </a>
+
+                      <a href="http://linkedin.com/in/omar-boune-khatab-thiam">
+                        <FaLinkedin  size={35} />
+                      </a>
                     </p>
                   </div>
                 </div>
